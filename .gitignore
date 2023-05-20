@@ -1,2 +1,6 @@
+# uploaded, analyzed files
 /uploads/
 /analyzed/
+
+# venv for mac
+/eds/
