@@ -28,7 +28,7 @@ def main():
 
 @app.post("/analyse")
 async def analyseFile(files: List[UploadFile] = File(...) ):
-    uploadPath = './uploades/'
+    uploadPath = './uploads/'
     print(files)
     
     for file in files:

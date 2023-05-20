@@ -7,7 +7,7 @@ def emotionDetecte(filename):
 
     emotion_detector = FER(mtcnn=True)
 
-    filePath = "./uploades/"
+    filePath = "./uploads/"
     img = cv2.imread(filePath + filename)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
