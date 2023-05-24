@@ -3,6 +3,8 @@ from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import FileResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
 
+from dotenv import load_dotenv
+
 import os
 
 import boto3
@@ -11,8 +13,21 @@ from cv import emotionDetecte
 
 app = FastAPI()
 
-s3 = boto3.resource('s3')
-s3_client = boto3.client('s3')
+load_dotenv()
+
+AWS_KEY = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SKEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+print("GOT AWS ACCESS INFOS : ")
+print("AWS_ACCESS_KEY_ID : ", AWS_KEY)
+print("AWS_SECRET_ACCESS_KEY : ", AWS_SKEY)
+
+session = boto3.Session(
+    aws_access_key_id=AWS_KEY,
+    aws_secret_access_key=AWS_SKEY
+)
+
+s3 = session.resource('s3')
+s3_client = session.client('s3')
 
 bucketname = 'parkinsense'
 

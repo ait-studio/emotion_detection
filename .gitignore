@@ -1,6 +1,4 @@
-# uploaded, analyzed files
-/uploads/
-/analyzed/
-
-# venv for mac
-/eds/
+uploads/
+analyzed/
+*/.env
+__pycache__
