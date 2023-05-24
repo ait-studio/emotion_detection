@@ -61,7 +61,9 @@ def emotionDetecte(filename):
     saveFilepath = "./analyzed/"
     cv2.imwrite(saveFilepath + saveFilename, img)
 
+    aws_link_header = "https://parkinsense.s3.ap-northeast-2.amazonaws.com/"
+
     if(len(analysis) > 0): 
-        return {"status": "200 ok", "result": analysis[0]['emotions']}
+        return {"status": "200 ok", "result": analysis[0]['emotions'], "link": aws_link_header + saveFilename}
     else:
         return {"status": "500 error", "result": "no face or emotion detected"}
