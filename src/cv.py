@@ -66,4 +66,4 @@ def emotionDetecte(filename):
     if(len(analysis) > 0): 
         return {"status": "200 ok", "result": analysis[0]['emotions'], "link": aws_link_header + saveFilename}
     else:
-        return {"status": "500 error", "result": "no face or emotion detected"}
+        return {"status": "200 ok", "result": "no face or emotion detected", "link": aws_link_header + saveFilename}

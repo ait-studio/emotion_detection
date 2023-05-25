@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
 import os
+import base64
 
 import boto3
 
@@ -42,21 +43,22 @@ def main():
     return {"Hello": "world"}
 
 @app.post("/analyse")
-async def analyseFile(files: List[UploadFile] = File(...) ):
+async def analyseFile(files: UploadFile = File(...) ):
     uploadPath = './uploads/'
-    print(files)
-    
-    for file in files:
-        contents = await file.read()
 
-        with open(os.path.join(uploadPath, file.filename), "wb") as fp:
-            fp.write(contents)
-        print(file.filename + "is saved")
+    contents = await files.read()
+    # print(contents)
+    # print(files.filename)
 
-        result = emotionDetecte(file.filename)
+    with open(os.path.join(uploadPath, files.filename), "wb") as fp:
+        fp.write(contents)
+    print(files.filename + " is saved")
 
-        filepath = "./analyzed/"
-        filename = file.filename.split(".png")[0] + "_analyzed.png"
-        s3_client.upload_file(filepath + filename, bucketname, filename, ExtraArgs={'ContentType': "image/png"})
+    result = emotionDetecte(files.filename)
+
+    filepath = "./analyzed/"
+    newFilename = files.filename.split(".png")[0] + "_analyzed.png"
+    s3_client.upload_file(filepath + newFilename, bucketname, newFilename, ExtraArgs={'ContentType': "image/png"})
 
     return result
+    # return True
