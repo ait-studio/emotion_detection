@@ -60,5 +60,8 @@ async def analyseFile(files: UploadFile = File(...) ):
     newFilename = files.filename.split(".png")[0] + "_analyzed.png"
     s3_client.upload_file(filepath + newFilename, bucketname, newFilename, ExtraArgs={'ContentType': "image/png"})
 
+    os.remove("./uploaded/" + files.filename)
+    os.remove("./analyzed/" + newFilename)
+
     return result
     # return True
