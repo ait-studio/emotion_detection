@@ -50,11 +50,11 @@ async def analyseFile(files: UploadFile = File(...) ):
     # print(contents)
     # print(files.filename)
 
-    with open(os.path.join(uploadPath, files.filename), "wb") as fp:
-        fp.write(contents)
-    print(files.filename + " is saved")
+    # with open(os.path.join(uploadPath, files.filename), "wb") as fp:
+    #     fp.write(contents)
+    # print(files.filename + " is saved")
 
-    result = emotionDetecte(files.filename)
+    result = emotionDetecte(files.filename, contents)
 
     filepath = "./analyzed/"
     newFilename = files.filename.split(".png")[0] + "_analyzed.png"

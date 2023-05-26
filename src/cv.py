@@ -1,14 +1,14 @@
 from fer import FER
 import cv2
 
-def emotionDetecte(filename):
+def emotionDetecte(filename, contents):
     cascPath = "./haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
 
     emotion_detector = FER(mtcnn=True)
 
-    filePath = "./uploads/"
-    img = cv2.imread(filePath + filename)
+    # filePath = "./uploads/"
+    img = cv2.imread(contents)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     faces = faceCascade.detectMultiScale(
